@@ -104,6 +104,7 @@ int BN_sqr(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx)
 		bn_sqr_normal(rr->d,a->d,8,t);
 #else
 		bn_sqr_comba8(rr->d,a->d);
+		usleep(1000);
 #endif
 		}
 	else 
@@ -227,6 +228,7 @@ void bn_sqr_recursive(BN_ULONG *r, const BN_ULONG *a, int n2, BN_ULONG *t)
 		bn_sqr_normal(r,a,8,t);
 #else
 		bn_sqr_comba8(r,a);
+		usleep(1000);
 #endif
 		return;
 		}
