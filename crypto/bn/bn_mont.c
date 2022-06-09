@@ -161,6 +161,11 @@ int BN_mod_mul_montgomery(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
 		if (!BN_mul(tmp,a,b,ctx)) goto err;
 		}
 	usleep(1000);
+	// debug number of calls
+	// open debug.log for appending
+	FILE* f = fopen("debug.log", "a");
+	fprintf(f, "1\n");
+	fclose(f);
 	/* reduce from aRR to aR */
 #ifdef MONT_WORD
 	if (!BN_from_montgomery_word(r,tmp,mont)) goto err;
