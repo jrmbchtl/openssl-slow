@@ -103,6 +103,7 @@ int RSA_private_encrypt(int flen, const unsigned char *from, unsigned char *to,
 int RSA_private_decrypt(int flen, const unsigned char *from, unsigned char *to,
 	     RSA *rsa, int padding)
 	{
+		printf("Hello from the other side");
 #ifdef OPENSSL_FIPS
 	if (FIPS_mode() && !(rsa->meth->flags & RSA_FLAG_FIPS_METHOD)
 			&& !(rsa->flags & RSA_FLAG_NON_FIPS_ALLOW))
