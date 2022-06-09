@@ -481,10 +481,10 @@ void bn_mul_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
 						    take extra args to do this
 						    well */
 		{
-		if (!zero)
+		if (!zero) {
 			bn_mul_comba8(&(t[n2]),t,&(t[n]));
 			usleep(1000);
-		else
+		} else
 			memset(&(t[n2]),0,16*sizeof(BN_ULONG));
 		
 		bn_mul_comba8(r,a,b);
