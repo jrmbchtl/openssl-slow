@@ -160,9 +160,11 @@ int BN_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx)
 		{
 		if (!BN_sqr(v,v,ctx)) goto err;
 		usleep(1000);
+		printf("square\n");
 		if (BN_is_bit_set(p,i))
 			{
 			if (!BN_mul(rr,rr,v,ctx)) goto err;
+			printf("multiply\n");
 			usleep(1000);
 			}
 		}
