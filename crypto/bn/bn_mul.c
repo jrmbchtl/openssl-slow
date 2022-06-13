@@ -415,7 +415,6 @@ void bn_mul_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
 	if (n2 == 8 && dna == 0 && dnb == 0)
 		{
 		bn_mul_comba8(r,a,b);
-		usleep(1000);
 		return; 
 		}
 # endif /* BN_MUL_COMBA */
@@ -483,14 +482,11 @@ void bn_mul_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n2,
 		{
 		if (!zero) {
 			bn_mul_comba8(&(t[n2]),t,&(t[n]));
-			usleep(1000);
 		} else
 			memset(&(t[n2]),0,16*sizeof(BN_ULONG));
 		
 		bn_mul_comba8(r,a,b);
-		usleep(1000);
 		bn_mul_comba8(&(r[n2]),&(a[n]),&(b[n]));
-		usleep(1000);
 		}
 	else
 # endif /* BN_MUL_COMBA */
@@ -616,9 +612,7 @@ void bn_mul_part_recursive(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, int n,
 	if (n == 8)
 		{
 		bn_mul_comba8(&(t[n2]),t,&(t[n]));
-		usleep(1000);
 		bn_mul_comba8(r,a,b);
-		usleep(1000);
 		bn_mul_normal(&(r[n2]),&(a[n]),tna,&(b[n]),tnb);
 		memset(&(r[n2+tna+tnb]),0,sizeof(BN_ULONG)*(n2-tna-tnb));
 		}
@@ -817,9 +811,7 @@ void bn_mul_high(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, BN_ULONG *l, int n2,
 	if (n == 8)
 		{
 		bn_mul_comba8(&(t[0]),&(r[0]),&(r[n]));
-		usleep(1000);
 		bn_mul_comba8(r,&(a[n]),&(b[n]));
-		usleep(1000);
 		}
 	else
 # endif
@@ -948,8 +940,15 @@ void bn_mul_high(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, BN_ULONG *l, int n2,
 	}
 #endif /* BN_RECURSION */
 
+void BN_mul_hook() {
+	// this is just a dummy function
+}
+
 int BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx)
 	{
+	BN_mul_hook();
+	usleep(1000);
+
 	int ret=0;
 	int top,al,bl;
 	BIGNUM *rr;
@@ -1008,7 +1007,6 @@ int BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx)
 			if (bn_wexpand(rr,16) == NULL) goto err;
 			rr->top=16;
 			bn_mul_comba8(rr->d,a->d,b->d);
-			usleep(1000);
 			goto end;
 			}
 		}

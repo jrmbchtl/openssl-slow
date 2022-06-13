@@ -60,10 +60,17 @@
 #include "cryptlib.h"
 #include "bn_lcl.h"
 
+void BN_sqr_hook() {
+	// this is just a dummy function 
+}
+
 /* r must not be a */
 /* I've just gone over this and it is now %20 faster on x86 - eay - 27 Jun 96 */
 int BN_sqr(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx)
 	{
+	BN_sqr_hook();
+	usleep(1000);
+
 	int max,al;
 	int ret = 0;
 	BIGNUM *tmp,*rr;
@@ -104,7 +111,6 @@ int BN_sqr(BIGNUM *r, const BIGNUM *a, BN_CTX *ctx)
 		bn_sqr_normal(rr->d,a->d,8,t);
 #else
 		bn_sqr_comba8(rr->d,a->d);
-		usleep(1000);
 #endif
 		}
 	else 
