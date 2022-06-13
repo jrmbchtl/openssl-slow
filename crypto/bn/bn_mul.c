@@ -940,14 +940,8 @@ void bn_mul_high(BN_ULONG *r, BN_ULONG *a, BN_ULONG *b, BN_ULONG *l, int n2,
 	}
 #endif /* BN_RECURSION */
 
-void BN_mul_hook() {
-	// this is just a dummy function
-}
-
 int BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx)
 	{
-	BN_mul_hook();
-	usleep(1000);
 
 	int ret=0;
 	int top,al,bl;
