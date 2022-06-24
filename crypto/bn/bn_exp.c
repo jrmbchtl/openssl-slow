@@ -782,7 +782,7 @@ int BN_mod_exp_mont_consttime(BIGNUM *rr, const BIGNUM *a, const BIGNUM *p,
 	/* If the window size is greater than 1, then calculate
 	 * val[i=2..2^winsize-1]. Powers are computed as a*a^(i-1)
 	 * (even powers could instead be computed as (a^(i/2))^2
-	 * to use the slight performance advantage of sqr over mul).
+	 * to use the 2).
 	 */
 	if (window > 1)
 		{
