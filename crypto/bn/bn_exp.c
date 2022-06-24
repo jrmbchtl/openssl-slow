@@ -131,7 +131,6 @@
 /* this one works - simple but works */
 int BN_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx)
 	{
-	printf("0\n");
 	int i,bits,ret=0;
 	BIGNUM *v,*rr;
 
@@ -161,11 +160,9 @@ int BN_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx)
 		{
 		if (!BN_sqr(v,v,ctx)) goto err;
 		usleep(1000);
-		printf("square\n");
 		if (BN_is_bit_set(p,i))
 			{
 			if (!BN_mul(rr,rr,v,ctx)) goto err;
-			printf("multiply\n");
 			usleep(1000);
 			}
 		}
@@ -182,7 +179,6 @@ int BN_mod_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, const BIGNUM *m,
 	       BN_CTX *ctx)
 	{
 	int ret;
-	printf("1\n");
 
 	bn_check_top(a);
 	bn_check_top(p);
@@ -257,7 +253,6 @@ int BN_mod_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, const BIGNUM *m,
 int BN_mod_exp_recp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
 		    const BIGNUM *m, BN_CTX *ctx)
 	{
-	printf("2\n");
 	int i,j,bits,ret=0,wstart,wend,window,wvalue;
 	int start=1;
 	BIGNUM *aa;
@@ -391,7 +386,6 @@ err:
 int BN_mod_exp_mont(BIGNUM *rr, const BIGNUM *a, const BIGNUM *p,
 		    const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *in_mont)
 	{
-	printf("3\n");
 	int i,j,bits,ret=0,wstart,wend,window,wvalue;
 	int start=1;
 	BIGNUM *d,*r;
@@ -586,7 +580,6 @@ static int MOD_EXP_CTIME_COPY_FROM_PREBUF(BIGNUM *b, int top, unsigned char *buf
 int BN_mod_exp_mont_consttime(BIGNUM *rr, const BIGNUM *a, const BIGNUM *p,
 		    const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *in_mont)
 	{
-	printf("4\n");
 	int i,bits,ret=0,window,wvalue;
 	int top;
 	BN_MONT_CTX *mont=NULL;
@@ -841,7 +834,6 @@ err:
 int BN_mod_exp_mont_word(BIGNUM *rr, BN_ULONG a, const BIGNUM *p,
                          const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *in_mont)
 	{
-	printf("5\n");
 	BN_MONT_CTX *mont = NULL;
 	int b, bits, ret=0;
 	int r_is_one;
@@ -993,7 +985,6 @@ err:
 int BN_mod_exp_simple(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
 		const BIGNUM *m, BN_CTX *ctx)
 	{
-	printf("6\n");
 	int i,j,bits,ret=0,wstart,wend,window,wvalue;
 	int start=1;
 	BIGNUM *d;
