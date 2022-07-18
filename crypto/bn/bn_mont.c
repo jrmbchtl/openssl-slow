@@ -155,14 +155,13 @@ int BN_mod_mul_montgomery(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
 	if (a == b)
 		{
 		if (!BN_sqr(tmp,a,ctx)) goto err;
-		usleep(1);
+		usleep(100);
 		}
 	else
 		{
 		if (!BN_mul(tmp,a,b,ctx)) goto err;
-		usleep(1);
+		usleep(100);
 		}
-	// usleep(1000);
 	/* reduce from aRR to aR */
 #ifdef MONT_WORD
 	if (!BN_from_montgomery_word(r,tmp,mont)) goto err;
